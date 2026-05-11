@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0d9488;
+  --color-primary-dark: #0f766e;
+  --color-primary-light: #14b8a6;
+  --color-primary-bg: #f0fdfa;
+  --color-accent: #f59e0b;
+}
+
+* { scrollbar-width: thin; scrollbar-color: #0d9488 #e2e8f0; }
+
+body {
+  background: linear-gradient(135deg, #f0fdfa 0%, #f8fafc 50%, #fefce8 100%);
+  background-attachment: fixed;
+}
+
+/* floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(-12px) rotateX(2deg) rotateY(2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(13,148,136,.15); }
+  50% { box-shadow: 0 0 40px rgba(13,148,136,.3); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.float-card {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-card-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+.glow-card {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* 3D perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-3d {
+  transition: transform .4s cubic-bezier(.23,1,.32,1);
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: rotateX(3deg) rotateY(-3deg) translateY(-4px);
+}
+
+.card-3d-reverse:hover {
+  transform: rotateX(3deg) rotateY(3deg) translateY(-4px);
+}
+
+/* tilt on mouse move */
+.tilt-card {
+  transition: transform .2s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* glass effect */
+.glass {
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.3);
+}
+
+.glass-strong {
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.4);
+}
+
+/* gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #0d9488, #0f766e, #14b8a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* shimmer button */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+  pointer-events: none;
+}
+
+/* image box 3D */
+.image-box-3d {
+  transition: all .4s cubic-bezier(.23,1,.32,1);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,.04),
+    0 2px 4px -2px rgba(0,0,0,.03),
+    inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+.image-box-3d:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 20px 40px -12px rgba(13,148,136,.2),
+    0 8px 24px -6px rgba(0,0,0,.08);
+}
+
+.image-box-3d.has-image {
+  border-color: #0d9488 !important;
+  box-shadow:
+    0 0 0 3px rgba(13,148,136,.1),
+    0 20px 40px -12px rgba(13,148,136,.15);
+}
+
+/* step number */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* portal pill */
+.portal-pill {
+  transition: all .3s cubic-bezier(.23,1,.32,1);
+  position: relative;
+}
+
+.portal-pill.active {
+  background: linear-gradient(135deg, #0d9488, #0f766e) !important;
+  box-shadow: 0 4px 12px rgba(13,148,136,.3);
+  transform: translateY(-1px);
+}
+
+/* spec card */
+.spec-card-3d {
+  transition: all .3s ease;
+}
+
+.spec-card-3d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px -8px rgba(13,148,136,.12);
+}
+
+/* background circles */
+.bg-circle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(80px);
+  opacity: .12;
+}
+
+/* success pulse */
+@keyframes success-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16,185,129,.4); }
+  70% { box-shadow: 0 0 0 12px rgba(16,185,129,0); }
+  100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.success-pulse {
+  animation: success-pulse 2s infinite;
+}
+
+/* image upload box */
+.upload-box {
+  border: 2px dashed #d1d5db;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.23,1,.32,1);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fafafa, #f8fafc);
+}
+
+.upload-box:hover {
+  border-color: #0d9488;
+  background: linear-gradient(135deg, #f0fdfa, #f8fafc);
+  box-shadow: 0 8px 30px -6px rgba(13,148,136,.15);
+}
+
+.upload-box.dragover {
+  border-color: #0d9488;
+  background: #f0fdfa;
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px -8px rgba(13,148,136,.2);
+}
+
+.upload-box.has-image {
+  border-style: solid;
+  border-color: #0d9488;
+  background: #fff;
+}
+
+/* image preview inside upload box */
+.upload-box .preview-img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  inset: 0;
+  padding: 6px;
+}
+
+.upload-box.has-image .preview-img { display: block; }
+.upload-box.has-image .upload-placeholder { display: none; }
+
+/* overlay on uploaded image */
+.upload-box .overlay-badge {
+  display: none;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13,148,136,.9);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+.upload-box.has-image .overlay-badge { display: block; }
+
+/* badge pulse */
+.badge-pulse {
+  position: relative;
+}
+
+.badge-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  border: 2px solid rgba(13,148,136,.3);
+  animation: badge-ring 2s infinite;
+}
+
+@keyframes badge-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* responsive fixes */
+@media (max-width: 640px) {
+  .upload-box { min-height: 180px; }
+}
